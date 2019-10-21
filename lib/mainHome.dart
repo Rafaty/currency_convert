@@ -10,7 +10,6 @@ class _MainHomeState extends State<MainHome> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(100.0),
@@ -19,35 +18,29 @@ class _MainHomeState extends State<MainHome> {
             actions: <Widget>[
               IconButton(
                 icon: Icon(Icons.refresh),
-                onPressed: (){},
+                onPressed: () {},
               )
             ],
-            bottom: TabBar(
-                tabs: [
-                  Tab(
-                    text: 'Home',
-                  ),
-                  Tab(
-                    text: 'Convert',
-                  ),
-                ]
-            ),
+            bottom: TabBar(tabs: [
+              Tab(
+                text: 'Home',
+              ),
+              Tab(
+                text: 'Convert',
+              ),
+            ]),
           ),
         ),
         body: TabBarView(
-
-            children: <Widget>[
-              Container(
-                color: Colors.lightBlue,
-
-              ),
-              ConvertScreen(),
-            ],
-
+          children: <Widget>[
+            Container(
+              color: Colors.lightBlue,
+            ),
+            ConvertScreen(),
+          ],
         ),
       ),
       length: 2,
-      
     );
   }
 }

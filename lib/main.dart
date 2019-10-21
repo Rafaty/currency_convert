@@ -8,8 +8,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-          primaryColor: Color(0xFF555659),
-          brightness: Brightness.dark,
+          //X]primaryColor: Color(0xFF555659),
+         // brightness: Brightness.dark,
           accentColor: Colors.white70,
       ),
       debugShowCheckedModeBanner: false,

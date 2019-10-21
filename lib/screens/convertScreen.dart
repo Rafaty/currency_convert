@@ -9,10 +9,14 @@ class ConvertScreen extends StatefulWidget {
 }
 
 class _ConvertScreenState extends State<ConvertScreen> {
-  Map<String,dynamic> data = {
+  Map<String,dynamic> dataFrom = {
     "flag":"assets/flags/au.png",
     "currency":"AUD"
 
+  };
+  Map<String,dynamic> dataTo= {
+    "flag":"assets/flags/us.png",
+    "currency":"USA"
   };
 
   TextEditingController _controllerAmount = TextEditingController();
@@ -35,21 +39,19 @@ class _ConvertScreenState extends State<ConvertScreen> {
           Padding(
             padding: const EdgeInsets.fromLTRB(12.0, 35.0, 12.0, 0),
             child: CustomTextField(controller: _controllerAmount,),
-
-
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.only(left:12.0,top:20.0),
-                child: CurrencyField(title: 'FROM',data: data,),
+                child: CurrencyField(title: 'FROM',data: dataFrom, onTap: () {},),
               ),
               SizedBox(width: 10.00,),
               Spacer(),
               Padding(
                 padding: const EdgeInsets.only(right:12.0,top:20.0),
-                child: CurrencyField(title: 'TO',data: data,),
+                child: CurrencyField(title: 'TO',data: dataTo,onTap: () {},),
               ),
             ],
           ),
@@ -58,3 +60,5 @@ class _ConvertScreenState extends State<ConvertScreen> {
     );
   }
 }
+
+
