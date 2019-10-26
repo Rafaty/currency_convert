@@ -3,7 +3,7 @@
 A new Flutter application.
 
 
-<p><img src="https://github.com/Rafaty/currency_convert/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2011%20Pro%20Max%20-%202019-10-26%20at%2002.15.16.png" alt="test" width="400" height="700"></p>
+<p><img src="https://github.com/Rafaty/currency_convert/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2011%20Pro%20Max%20-%202019-10-26%20at%2002.15.16.png" alt="test" width="600" height="1200"></p>
 
 
 
