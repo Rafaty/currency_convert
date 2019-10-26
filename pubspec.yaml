@@ -25,13 +25,13 @@ dependencies:
   cupertino_icons: ^0.1.2
   dio: ^3.0.3
   path_provider: ^1.4.0
-  json_annotation: ^3.0.0
+  flutter_money_formatter: ^0.8.3
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  json_serializable: ^3.2.0
+
 
 
 

@@ -12,8 +12,8 @@ class RateScreen extends StatefulWidget {
 
 class _RateScreenState extends State<RateScreen> {
   List ratesList = [];
-  Map<String,dynamic> mapData;
-  TextEditingController controllerSearch =TextEditingController();
+  Map<String, dynamic> mapData;
+  TextEditingController controllerSearch = TextEditingController();
 
   @override
   void initState() {
@@ -24,37 +24,65 @@ class _RateScreenState extends State<RateScreen> {
         ratesList = json.decode(data);
       });
       print(ratesList);
-    
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
-     
       children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(35.0),
-          child: SearchField(
-            controller:controllerSearch,
+        Container(
+          height: MediaQuery.of(context).size.height / 5,
+          color: Theme.of(context).primaryColor,
+          child: Stack(
+            children: <Widget>[
+              Positioned(
+                left: 30.0,
+                top: 20.0,
+                child: Text(
+                  'Popular Currency',
+                  style: TextStyle(fontSize: 35, color: Colors.white),
+                ),
+              ),
+              Positioned(
+                right: 30.0,
+                top: 20.0,
+                child: Center(
+                  child: InkWell(
+                    onTap: (){},
+                    splashColor: Colors.white,
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage('assets/flags/us.png'),
+                    ),
+                  ),
+                ),
+              ),
+              Positioned(
+                left: 30.00,
+                right: 30.00,
+                bottom: 20.0,
+                child: SearchField(
+                  controller: controllerSearch,
+                ),
+              ),
+            ],
           ),
         ),
         Expanded(
-                  child: GridView.builder(
-            gridDelegate:
-                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+          child: ListView.builder(
             itemCount: ratesList.length,
             itemBuilder: (BuildContext context, int index) {
               final item = ratesList[index];
-                 mapData= {
+              mapData = {
                 "currency": item["currency"],
                 "name": item["name"],
                 "flag": item["flag"],
                 "value": item["value"],
                 "symbol": item["symbol"],
-                 };
-             
-              return FlagField(data:mapData);
+              };
+              return FlagField(
+                data: mapData,
+              );
             },
           ),
         ),

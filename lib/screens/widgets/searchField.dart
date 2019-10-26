@@ -16,8 +16,8 @@ class _SearchFieldState extends State<SearchField> {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey,
-              blurRadius: 15.00,
+              color: Colors.white,
+              blurRadius: 5.00,
             )
           ]),
       child: Row(

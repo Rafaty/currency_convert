@@ -43,9 +43,6 @@ class RateDataLocal {
 
   Future<File> get _localFile async {
     final path = await _localPath;
-
-    print('$path/data.json');
-    
     return File('$path/data.json');
   }
 
@@ -59,13 +56,12 @@ class RateDataLocal {
     }
   }
 
- Future<File> saveData(List list) async {
+  Future<File> saveData(List list) async {
     String data = json.encode(list);
 
     final file = await _localFile;
-    //file.deleteSync();
+    // file.deleteSync();
     file.createSync();
     return file.writeAsString(data);
-  }    
+  }
 }
-

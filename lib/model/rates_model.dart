@@ -276,6 +276,5 @@ class Rates {
       }
     });
     rateDataLocal.saveData(jsonLocal);
-    print(jsonLocal);
   }
 }

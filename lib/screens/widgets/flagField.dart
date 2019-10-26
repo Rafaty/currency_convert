@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 
 class FlagField extends StatefulWidget {
   final Map<String, dynamic> data;
@@ -10,75 +11,46 @@ class FlagField extends StatefulWidget {
 }
 
 class _FlagFieldState extends State<FlagField> {
+  FlutterMoneyFormatter formattedValue;
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      formattedValue = FlutterMoneyFormatter(
+          amount: double.parse(widget.data["value"]),
+          settings: MoneyFormatterSettings(
+              symbol: widget.data["symbol"],
+              thousandSeparator: '.',
+              decimalSeparator: ',',
+              symbolAndNumberSeparator: ' ',
+              fractionDigits: 3,
+              compactFormatType: CompactFormatType.short
+              )
+        );
+      }
+   );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(7.0),
-      child: Container(
-        width: 150,
-        height: 100,
-        child: Container(
-           decoration: BoxDecoration(
-            image: DecorationImage(
-              colorFilter: ColorFilter.mode(
-                Color.fromARGB(120, 20, 10, 40),
-                BlendMode.srcOver,
-              ),
-              image: AssetImage(widget.data["flag"]),
-              fit: BoxFit.cover,
-            ),
-            borderRadius: BorderRadius.circular(3.00),
-            boxShadow: [
-              BoxShadow(
-                blurRadius: 1.0,
-                color: Colors.white,
-              ),
-            ]),
-          child: Stack(
-            fit: StackFit.expand,
-            children: <Widget>[
-              Positioned(
-                left: 3.0,
-                bottom: 2.0,
-                child: Text(widget.data["name"] ?? 'Brazilian Real'),
-              ),
-              Positioned(
-                bottom: 40.00,
-                right: 50.00,
-                child: Row(
-                  children: <Widget>[
-                    Text( 
-                      widget.data["symbol"] ?? 'R\$',
-                      style:TextStyle(
-                        fontSize: 15.00,
-                      ),
-                    ),
-                    Padding(
-
-                      padding: const EdgeInsets.only(right:2.0),
-                      child: Text(
-                         '3,50',
-                        style: TextStyle(fontSize: 40.00),
-                        ),
-                    ),
-                  ],
-                ),
-              ),
-              Positioned(
-                top: 10.00,
-                right: 10.00,
-                child: Text(
-                  widget.data["currency"] ?? 'BRL',
-                  style: TextStyle(
-                    fontSize: 30.0,
-                    // fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-            ],
+    return Card(
+      child: ListTile(
+          leading: CircleAvatar(
+              backgroundImage: AssetImage(
+            widget.data["flag"],
+          )),
+          title: Text(
+            widget.data["currency"],
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
-        ),
-      ),
+          subtitle: Text(
+            widget.data["name"],
+            style: TextStyle(color: Colors.black87),
+          ),
+          trailing: Text(
+            formattedValue.output.compactSymbolOnLeft,
+            style: TextStyle(fontSize: 18.00, fontWeight: FontWeight.w600),
+          )),
     );
   }
 }
