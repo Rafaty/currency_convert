@@ -1,15 +1,10 @@
-import 'package:currency_convert/data/rates_data.dart';
 import 'package:currency_convert/mainHome.dart';
 import 'package:currency_convert/model/rates_model.dart';
-
 import 'package:flutter/material.dart';
 
-Future main() async {
-
+Future main() async {  
   Rates rates = Rates();
-
-  rates.saveRatesLocal("AUD");
-
+  rates.saveRatesLocal("USD");
   runApp(MyApp());
 }
 
@@ -19,7 +14,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         primaryColor: Color(0xFF555659),
-        brightness: Brightness.dark,
         accentColor: Colors.white70,
       ),
       debugShowCheckedModeBanner: false,

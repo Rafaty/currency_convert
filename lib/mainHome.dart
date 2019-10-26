@@ -1,4 +1,5 @@
 import 'package:currency_convert/screens/convertScreen.dart';
+import 'package:currency_convert/screens/rates_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainHome extends StatefulWidget {
@@ -33,9 +34,7 @@ class _MainHomeState extends State<MainHome> {
         ),
         body: TabBarView(
           children: <Widget>[
-            Container(
-              color: Colors.red,
-            ),
+            RateScreen(),
             ConvertScreen(),
           ],
         ),

@@ -1,6 +1,5 @@
 import 'package:currency_convert/data/rates_data.dart';
 import 'package:currency_convert/util/requests.dart';
-import 'package:flutter/material.dart';
 
 class Rates {
   Future<Map<String, dynamic>> getRatesApi(String base) async {
@@ -13,187 +12,270 @@ class Rates {
 
   saveRatesLocal(String base) async {
     Map<String, dynamic> map = await getRatesApi(base);
-    List jsonLocal = [];
+    List<Map<String, dynamic>> jsonLocal = [];
     RateDataLocal rateDataLocal = RateDataLocal();
     map.forEach((key, value) {
-      jsonLocal.add("$key: $value");
-      //save on local json path to flag of the country
+      Map<String, dynamic> mapLocal = {
+        "currency": "$key",
+        "value": "$value",
+      };
+      jsonLocal.add(mapLocal);
+      //save on local json DATA from the API more the flag path, currency name and symbol
+
       switch (key) {
         case "AUD":
           {
-            jsonLocal.add("flag: assets/flags/au.png");
+            mapLocal["flag"] = "assets/flags/au.png";
+            mapLocal["name"] = "Australian dollar";
+            mapLocal["symbol"] = "\$";
+
           }
           break;
 
         case "BGN":
           {
-            jsonLocal.add("flag: assets/flags/bg.png");
+            mapLocal["flag"] = "assets/flags/bg.png";
+            mapLocal["name"] = "Bulgarian lev";
+            mapLocal["symbol"] = "лв";
           }
           break;
 
         case "BRL":
           {
-            jsonLocal.add("flag: assets/flags/br.png");
+            mapLocal["flag"] = "assets/flags/br.png";
+            mapLocal["name"] = "Brazilian real";
+            mapLocal["symbol"] = "R\$";
           }
           break;
 
         case "CAD":
           {
-            jsonLocal.add("flag: assets/flags/ca.png");
+            mapLocal["flag"] = "assets/flags/ca.png";
+            mapLocal["name"] = "Canadian dollar";
+            mapLocal["symbol"] = "\$";
           }
           break;
 
         case "CHF":
           {
-            jsonLocal.add("flag: assets/flags/ch.png");
+            mapLocal["flag"] = "assets/flags/ch.png";
+            mapLocal["name"] = "Swiss franc";
+            mapLocal["symbol"] = "CHF";
           }
           break;
 
         case "CNY":
           {
-            jsonLocal.add("flag: assets/flags/cn.png");
+            mapLocal["flag"] = "assets/flags/cn.png";
+            mapLocal["name"] = "Chinese yuan renminbi";
+            mapLocal["symbol"] = "¥";
           }
           break;
 
         case "CZK":
           {
-            jsonLocal.add("flag: assets/flags/cz.png");
+            mapLocal["flag"] = "assets/flags/cz.png";
+            mapLocal["name"] = "Czech koruna";
+            mapLocal["symbol"] = "Kč";
           }
           break;
 
         case "DKK":
           {
-            jsonLocal.add("flag: assets/flags/dk.png");
+            mapLocal["flag"] = "assets/flags/dk.png";
+            mapLocal["name"] = "Danish krone";
+            mapLocal["symbol"] = "\$";
           }
           break;
+        case "EUR":
+          {
+            mapLocal["flag"] = "assets/flags/eu.png";
+            mapLocal["name"] = "Euro";
+            mapLocal["symbol"] = "€";
+          }
+          break;
+
         case "GBP":
           {
-            jsonLocal.add("flag: assets/flags/gb.png");
+            mapLocal["flag"] = "assets/flags/gb.png";
+            mapLocal["name"] = "Pound sterling";
+            mapLocal["symbol"] = "£";
           }
           break;
 
         case "HKD":
           {
-            jsonLocal.add("flag: assets/flags/.png");
+            mapLocal["flag"] = "assets/flags/hk.png";
+            mapLocal["name"] = "Hong Kong dollar";
+            mapLocal["symbol"] = "\$";
           }
           break;
         case "HRK":
           {
-            jsonLocal.add("flag: assets/flags/hk.png");
+            mapLocal["flag"] = "assets/flags/hr.png";
+            mapLocal["name"] = "Croatian kuna";
+            mapLocal["symbol"] = "kn";
           }
           break;
-
+        case "HUF":
+          {
+            mapLocal["flag"] = "assets/flags/hu.png";
+            mapLocal["name"] = "Hungarian forint";
+            mapLocal["symbol"] = "Ft";
+          }
+          break;
         case "IDR":
           {
-            jsonLocal.add("flag: assets/flags/id.png");
+            mapLocal["flag"] = "assets/flags/id.png";
+            mapLocal["name"] = "Indonesian rupiah";
+            mapLocal["symbol"] = "Rp";
           }
           break;
 
         case "ILS":
           {
-            jsonLocal.add("flag: assets/flags/il.png");
+            mapLocal["flag"] = "assets/flags/il.png";
+            mapLocal["name"] = "Israeli shekel";
+            mapLocal["symbol"] = "₪";
           }
           break;
 
         case "INR":
           {
-            jsonLocal.add("flag: assets/flags/in.png");
+            mapLocal["flag"] = "assets/flags/in.png";
+            mapLocal["name"] = "AIndian rupee";
+            mapLocal["symbol"] = "TD";
           }
           break;
         case "ISK":
           {
-            jsonLocal.add("flag: assets/flags/is.png");
+            mapLocal["flag"] = "assets/flags/is.png";
+            mapLocal["name"] = "Icelandic kronar";
+            mapLocal["symbol"] = "kr";
           }
           break;
 
         case "JPY":
           {
-            jsonLocal.add("flag: assets/flags/jp.png");
+            mapLocal["flag"] = "assets/flags/jp.png";
+            mapLocal["name"] = "Japanese yen";
+            mapLocal["symbol"] = "¥";
           }
           break;
         case "KRW":
           {
-            jsonLocal.add("flag: assets/flags/kr.png");
+            mapLocal["flag"] = "assets/flags/kr.png";
+            mapLocal["name"] = "South Korean won";
+            mapLocal["symbol"] = "₩";
           }
           break;
 
         case "MXN":
           {
-            jsonLocal.add("flag: assets/flags/mx.png");
+            mapLocal["flag"] = "assets/flags/mx.png";
+            mapLocal["name"] = "Mexican peso";
+            mapLocal["symbol"] = "\$";
           }
           break;
         case "MYR":
           {
-            jsonLocal.add("flag: assets/flags/my.png");
+            mapLocal["flag"] = "assets/flags/my.png";
+            mapLocal["name"] = "Malaysian ringgit";
+            mapLocal["symbol"] = "RM";
           }
           break;
         case "NOK":
           {
-            jsonLocal.add("flag: assets/flags/no.png");
+            mapLocal["flag"] = "assets/flags/no.png";
+            mapLocal["name"] = "Norwegian krone";
+            mapLocal["symbol"] = "kr";
           }
           break;
 
         case "NZD":
           {
-            jsonLocal.add("flag: assets/flags/nz.png");
+            mapLocal["flag"] = "assets/flags/nz.png";
+            mapLocal["name"] = "New Zealand dollar";
+            mapLocal["symbol"] = "\$";
           }
           break;
         case "PHP":
           {
-            jsonLocal.add("flag: assets/flags/ph.png");
+            mapLocal["flag"] = "assets/flags/ph.png";
+            mapLocal["name"] = "Philippine peso";
+            mapLocal["symbol"] = "₱";
           }
           break;
 
         case "PLN":
           {
-            jsonLocal.add("flag: assets/flags/pl.png");
+            mapLocal["flag"] = "assets/flags/pl.png";
+            mapLocal["name"] = "Polish zloty";
+            mapLocal["symbol"] = "zł";
           }
           break;
         case "RON":
           {
-            jsonLocal.add("flag: assets/flags/ro.png");
+            mapLocal["flag"] = "assets/flags/ro.png";
+            mapLocal["name"] = "Romanian leu";
+            mapLocal["symbol"] = "kr";
           }
           break;
         case "RUB":
           {
-            jsonLocal.add("flag: assets/flags/ru.png");
+            mapLocal["flag"] = "assets/flags/ru.png";
+            mapLocal["name"] = "Russian rouble";
+            mapLocal["symbol"] = "₽";
           }
           break;
 
         case "SEK":
           {
-            jsonLocal.add("flag: assets/flags/se.png");
+            mapLocal["flag"] = "assets/flags/se.png";
+            mapLocal["name"] = "Swedish krona";
+            mapLocal["symbol"] = "kr";
           }
           break;
         case "SGD":
           {
-            jsonLocal.add("flag: assets/flags/sg.png");
+            mapLocal["flag"] = "assets/flags/sg.png";
+            mapLocal["name"] = "Singapore dollar";
+            mapLocal["symbol"] = "\$";
           }
           break;
 
         case "THB":
           {
-            jsonLocal.add("flag: assets/flags/th.png");
+            mapLocal["flag"] = "assets/flags/th.png";
+            mapLocal["name"] = "Thai baht";
+            mapLocal["symbol"] = "฿";
           }
           break;
         case "TRY":
           {
-            jsonLocal.add("flag: assets/flags/tr.png");
+            mapLocal["flag"] = "assets/flags/tr.png";
+            mapLocal["name"] = "Turkish lira";
+            mapLocal["symbol"] = "TD";
           }
           break;
         case "USD":
           {
-            jsonLocal.add("flag: assets/flags/us.png");
+            mapLocal["flag"] = "assets/flags/us.png";
+            mapLocal["name"] = "US dollar";
+            mapLocal["symbol"] = "\$";
           }
           break;
 
         case "ZAR":
           {
-            jsonLocal.add("flag: assets/flags/za.png");
+            mapLocal["flag"] = "assets/flags/za.png";
+            mapLocal["name"] = "South African rand";
+            mapLocal["symbol"] = "R";
           }
           break;
       }
     });
     rateDataLocal.saveData(jsonLocal);
+    print(jsonLocal);
   }
 }

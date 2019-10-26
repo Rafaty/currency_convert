@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:currency_convert/util/consts.dart';
 import 'package:dio/dio.dart';
 
