@@ -6,7 +6,6 @@ class Rates {
     Request request = Request(base);
     var jsonString = await request.getJson();
     var rate = rateFromJson(jsonString);
-
     return rate.rates;
   }
 
@@ -19,7 +18,6 @@ class Rates {
         "currency": "$key",
         "value": "$value",
       };
-      jsonLocal.add(mapLocal);
       //save on local json DATA from the API more the flag path, currency name and symbol
 
       switch (key) {
@@ -28,7 +26,6 @@ class Rates {
             mapLocal["flag"] = "assets/flags/au.png";
             mapLocal["name"] = "Australian dollar";
             mapLocal["symbol"] = "\$";
-
           }
           break;
 
@@ -274,6 +271,7 @@ class Rates {
           }
           break;
       }
+      jsonLocal.add(mapLocal);
     });
     rateDataLocal.saveData(jsonLocal);
   }

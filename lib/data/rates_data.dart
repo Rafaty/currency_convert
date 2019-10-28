@@ -58,7 +58,6 @@ class RateDataLocal {
 
   Future<File> saveData(List list) async {
     String data = json.encode(list);
-
     final file = await _localFile;
     // file.deleteSync();
     file.createSync();

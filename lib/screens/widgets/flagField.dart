@@ -15,7 +15,7 @@ class _FlagFieldState extends State<FlagField> {
   @override
   void initState() {
     super.initState();
-    setState(() {
+   
       formattedValue = FlutterMoneyFormatter(
           amount: double.parse(widget.data["value"]),
           settings: MoneyFormatterSettings(
@@ -26,11 +26,9 @@ class _FlagFieldState extends State<FlagField> {
               fractionDigits: 3,
               compactFormatType: CompactFormatType.short
               )
-        );
-      }
-   );
+        ); 
+ 
   }
-
   @override
   Widget build(BuildContext context) {
     return Card(

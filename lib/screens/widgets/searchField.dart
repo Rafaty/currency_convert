@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class SearchField extends StatefulWidget {
   final TextEditingController controller;
-  SearchField({@required this.controller});
+  final ValueChanged<String> onChanged;
+  SearchField({@required this.controller,@required this.onChanged});
   @override
   _SearchFieldState createState() => _SearchFieldState();
 }
@@ -26,16 +27,18 @@ class _SearchFieldState extends State<SearchField> {
             child: Padding(
               padding: const EdgeInsets.only(left: 8.0),
               child: TextField(
+
                   style: TextStyle(color: Colors.black),
                   controller: widget.controller,
+                  
                   decoration: InputDecoration(
                     hintText: 'Search',
                     hintStyle: TextStyle(color: Colors.grey),
                     border: InputBorder.none,
                   ),
-                  onChanged: ((text) {
-                    setState(() {});
-                  })),
+                  onChanged: widget.onChanged,
+                
+              )
             ),
           ),
           Padding(

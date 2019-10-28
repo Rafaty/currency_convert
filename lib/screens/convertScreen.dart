@@ -1,3 +1,4 @@
+import 'package:currency_convert/blocs/bloc_json_rates.dart';
 import 'package:currency_convert/screens/widgets/currencyField.dart';
 import 'package:currency_convert/screens/widgets/textFieldCustom.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,9 @@ class _ConvertScreenState extends State<ConvertScreen> {
   };
 
   TextEditingController _controllerAmount = TextEditingController();
+
+  RatesBloc bloc =RatesBloc();
+  List listEmpity =[];
 
   @override
   Widget build(BuildContext context) {

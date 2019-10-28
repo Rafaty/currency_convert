@@ -12,7 +12,9 @@ class RateScreen extends StatefulWidget {
 
 class _RateScreenState extends State<RateScreen> {
   List ratesList = [];
+  List searchList = [];
   Map<String, dynamic> mapData;
+  Map<String, dynamic> mapSearch;
   TextEditingController controllerSearch = TextEditingController();
 
   @override
@@ -22,9 +24,39 @@ class _RateScreenState extends State<RateScreen> {
     jsonLocal.readData().then((data) {
       setState(() {
         ratesList = json.decode(data);
+
+        ratesList.sort((a, b) {
+          return a['currency']
+              .toLowerCase()
+              .compareTo(b['currency'].toLowerCase());
+        });
       });
-      print(ratesList);
     });
+  }
+
+  void _searchCurrency(String query) {
+    if (query.length == 0) {
+      setState(() {
+        searchList.clear();
+      });
+    } else {
+      for (var item in ratesList) {
+        if (item["currency"]
+            .toString()
+            .toLowerCase()
+            .contains(query.toLowerCase())) {
+          print(item["currency"]);
+          searchList.sort((a, b) {
+            return query.toLowerCase().compareTo(a["currency"].toLowerCase());
+          });
+          setState(() {
+            if (!searchList.contains(item)) {
+              searchList.add(item);
+            }
+          });
+        }
+      }
+    }
   }
 
   @override
@@ -49,7 +81,9 @@ class _RateScreenState extends State<RateScreen> {
                 top: 20.0,
                 child: Center(
                   child: InkWell(
-                    onTap: (){},
+                    onTap: () {
+                      
+                    },
                     splashColor: Colors.white,
                     child: CircleAvatar(
                       backgroundImage: AssetImage('assets/flags/us.png'),
@@ -62,30 +96,54 @@ class _RateScreenState extends State<RateScreen> {
                 right: 30.00,
                 bottom: 20.0,
                 child: SearchField(
+                  onChanged: (text) {
+                    _searchCurrency(text);
+                  },
                   controller: controllerSearch,
                 ),
               ),
             ],
           ),
         ),
-        Expanded(
-          child: ListView.builder(
-            itemCount: ratesList.length,
-            itemBuilder: (BuildContext context, int index) {
-              final item = ratesList[index];
-              mapData = {
-                "currency": item["currency"],
-                "name": item["name"],
-                "flag": item["flag"],
-                "value": item["value"],
-                "symbol": item["symbol"],
-              };
-              return FlagField(
-                data: mapData,
-              );
-            },
-          ),
-        ),
+        searchList != null && searchList.length > 0
+            ? Expanded(
+                child: ListView.builder(
+                  itemCount: searchList.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final item = searchList[index];
+
+                    mapSearch = {
+                      "currency": item["currency"],
+                      "name": item["name"],
+                      "flag": item["flag"],
+                      "value": item["value"],
+                      "symbol": item["symbol"],
+                    };
+                    return FlagField(
+                      data: mapSearch,
+                    );
+                  },
+                ),
+              )
+            : Expanded(
+                child: ListView.builder(
+                  itemCount: ratesList.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    searchList.clear();
+                    final item = ratesList[index];
+                    mapData = {
+                      "currency": item["currency"],
+                      "name": item["name"],
+                      "flag": item["flag"],
+                      "value": item["value"],
+                      "symbol": item["symbol"],
+                    };
+                    return FlagField(
+                      data: mapData,
+                    );
+                  },
+                ),
+              ),
       ],
     );
   }
